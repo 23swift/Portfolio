@@ -1,0 +1,64 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import'app/customTheme/customTheme';
+.container{
+    margin: 5px;
+    
+    padding: 0;
+}
+.text-primary{
+
+    color: #1e4f8e !important;
+}
+.bg-primary{
+    background-color: #1e4f8e !important;
+}
+body{
+    background-color: #fafafa;
+}
+.mat-form-field-label{
+
+    color: #1e4f8e  !important;
+    font-size: 8px;
+}
+.display-flex { display: flex; }
+
+.flex-1 { flex: 1; }
+
+.flex-2 { flex: 2; }
+
+.flex-3 { flex: 3; }
+
+.flex-4 { flex: 4; }
+
+.flex-5 { flex: 5; }
+
+.flex-6 { flex: 6; }
+
+[class*="flex-"] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+[class*="flex-"]:first-child {
+  padding-left: 0;
+}
+
+[class*="flex-"]:nth-last-child(2) {
+  padding-right: 0;
+}
+fieldset{
+    color: #f18608 !important;
+}
+
+.material-icons.white600 { color:whitesmoke; }
+.material-icons.orange600 { color: #FB8C00; }
+table {
+    width: 100%;
+  }
+  th{
+      color: #1e4f8e;
+  }
+  .mat-step-header .mat-step-icon-selected{
+    background-color: #f59f12 !important;
+  }

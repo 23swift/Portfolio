@@ -1,0 +1,27 @@
+
+        
+            <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center">
+                <fieldset >Customer Information</fieldset>
+                <form [formGroup]="customerInfoForm" (ngSubmit)="onSubmit(customerInfo)">
+                
+                    <formly-form [model]="customerInfo" [fields]="customerInfoFields" [form]="customerInfoForm" [options]="options">
+                        
+                      <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end">
+                          <button mat-raised-button color="secondary" type="submit">
+                              Cancel
+                            </button>
+                        <button mat-raised-button color="primary" type="submit">
+                          Submit
+                        </button>
+                       </div>
+                    </formly-form>
+                    
+                      
+                  </form>
+            </div>
+            <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center">
+                <fieldset >Owners</fieldset>
+                <app-ownership-list></app-ownership-list>
+                <fieldset >Signatories</fieldset>
+                <app-signatories-list></app-signatories-list>
+            </div>
