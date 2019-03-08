@@ -2,26 +2,40 @@
         
             <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center">
                 <fieldset >Customer Information</fieldset>
-                <form [formGroup]="customerInfoForm" (ngSubmit)="onSubmit(customerInfo)">
+              
+                        <form [formGroup]="customerInfoForm">
                 
-                    <formly-form [model]="customerInfo" [fields]="customerInfoFields" [form]="customerInfoForm" [options]="options">
-                        
-                      <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end">
-                          <button mat-raised-button color="secondary" type="submit">
-                              Cancel
-                            </button>
-                        <button mat-raised-button color="primary" type="submit">
-                          Submit
-                        </button>
-                       </div>
-                    </formly-form>
-                    
-                      
-                  </form>
+                                <formly-form [model]="customerInfo" [fields]="customerInfoFields" [form]="customerInfoForm" [options]="options">
+                                       
+                                 
+                                  
+                                </formly-form>
+                                
+                             
+                              </form>
+                              <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center">
+                                    <fieldset >Owners</fieldset>
+                                    <app-ownership-list [data]="customerInfo.owners"></app-ownership-list>
+                                    <fieldset >Signatories</fieldset>
+                                    <app-signatories-list></app-signatories-list>
+                                </div>
+                                <div [hidden]="submitted" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end">
+                                        <button mat-raised-button color="secondary" type="submit">
+                                            Cancel
+                                          </button>
+                                      <button mat-raised-button color="primary" type="submit" (click)="onSubmit(customerInfo)" ng-disabled="customerInfoForm.$invalid">
+                                        Submit
+                                      </button>
+                                     </div>
+                              <div [hidden]="!submitted" fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="end">
+                                        
+                                  
+                                    <button mat-button color="primary" (click)=onUpdate()>
+                                            <i class="material-icons">
+                                                edit
+                                                </i>
+                                        </button>
+                                   </div>
+                
             </div>
-            <div fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="center">
-                <fieldset >Owners</fieldset>
-                <app-ownership-list></app-ownership-list>
-                <fieldset >Signatories</fieldset>
-                <app-signatories-list></app-signatories-list>
-            </div>
+            

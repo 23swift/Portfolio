@@ -4,6 +4,7 @@ import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { FormGroup } from '@angular/forms';
 
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
+import {Owner} from '../../customer-info/customer-info.class';
 export interface DialogData {
     animal: 'panda' | 'unicorn' | 'lion';
   }
@@ -51,7 +52,7 @@ export interface DialogData {
               defaultValue: 'N/A',
               templateOptions: {
                 label: 'Type of Related Party',
-                // options: this._dropDownService.getDropdown('TORP'),
+                options: [{code:1,value:'Owner'}],
                 labelProp: 'value',
                 valueProp: 'code',
               }
@@ -73,7 +74,7 @@ export interface DialogData {
           ]
         }
       ];
-    model: Object;
+    model: Owner = new Owner();
     options: FormlyFormOptions = {
       showError: () => {
         return false;
@@ -81,11 +82,21 @@ export interface DialogData {
     };
 
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,private _modalRef: MatDialogRef<AddOwnershipDialog>) {}
+    constructor(@Inject(MAT_DIALOG_DATA) public data: Owner,private _modalRef: MatDialogRef<AddOwnershipDialog>) {}
     ngOnInit() {
         this.form = new FormGroup({});
     }
+    onAddOwner(customerInfo) {
+     
+      // customerInfo.detail=[{'name':'Arnold Costamero','address':'Manila'}];
+      
+      console.log(customerInfo);
+      this._modalRef.close();
+      
+
+    }
     cancel() {
         this._modalRef.close();
+        
       }
   }

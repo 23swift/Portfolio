@@ -1,7 +1,9 @@
 import { Component, OnInit,NgModule } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
-
+import {CustomerInfoService} from './customer-info.service'
+import{CustomerInfo} from './customer-info.class';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-customer-info',
@@ -10,77 +12,48 @@ import { FormlyFormOptions, FormlyFieldConfig } from '@ngx-formly/core';
 })
 export class CustomerInfoComponent implements OnInit {
   customerInfoForm = new FormGroup({});
-  customerInfo: any = {};
-  options: FormlyFormOptions = {};
-  constructor() { }
-
+  customerInfo: CustomerInfo= new CustomerInfo();
+  
+  options: FormlyFormOptions  = {
+    formState: {
+      style:"color:red",
+      readOnly: false
+    }
+  };;
+  submitted = false;
+  constructor(private _service:CustomerInfoService) { }
+  customerInfoFields: FormlyFieldConfig[];
   ngOnInit() {
+    this.customerInfo.owners=[];
+    // this.customerInfo.owners= [
+    //   {Id: 1, name: 'Hydrogen', percentOfOwnership: 1.0079, typeOfRelatedParty: 'H',remarks:'Test'},
+    //   {Id: 2, name: 'Helium', percentOfOwnership: 4.0026, typeOfRelatedParty: 'He',remarks:'Test'},
+    //   {Id: 3, name: 'Lithium', percentOfOwnership: 6.941, typeOfRelatedParty: 'Li',remarks:'Test'},
+      
+     
+    // ];
+    this.customerInfoFields=this._service.getFields(this.submitted);
   }
-  customerInfoFields: FormlyFieldConfig[] = [
-    {
-      fieldGroupClassName: 'display-flex',
-      fieldGroup: [
-        {
-          className: 'flex-1',
-          type: 'input',
-          key: 'legalName',
-          templateOptions: {
-            label: 'Business/Legal Name',
-            placeholder: 'Business Name',
-            required: true,
-            maxLength: 50
-          },
-        },
-        {
-          className: 'flex-1',
-          type: 'select',
-          key: 'ownership',
-          templateOptions: {
-            label: 'Ownership',
-            required: true,
-            // options: this._dropDownService.getDropdown('OW'),
-            labelProp: 'value',
-            valueProp: 'code'
-          }
-        },
-        {
-          className: 'flex-1',
-          type: 'datepicker',
-          key: 'dtiRegDate',
-          templateOptions: {
-            label: 'Sec/DTI Registration Date',
-            required: true
-          }
-        }
-      ],
-    },
-    {
-      fieldGroupClassName: 'display-flex',
-      fieldGroup: [
-        {
-          className: 'flex-1',
-          type: 'input',
-          key: 'registeredBusinessNumber',
-          templateOptions: {
-            label: 'Registered Business Number',
-            maxLength: 11
-          }
-        },
-        {
-          className: 'flex-1',
-          type: 'input',
-          key: 'customerNumber',
-          templateOptions: {
-            label: 'Customer Number',
-            maxLength: 12
-          }
-        }
-      ]
-    }
-  ];
   
   
-    onSubmit(orderInfo) {
-      console.log(orderInfo);
+  
+    onSubmit(customerInfo) {
+     
+      // customerInfo.detail=[{'name':'Arnold Costamero','address':'Manila'}];
+      this.submitted=true;
+      
+      console.log(customerInfo);
+      this.customerInfoFields=this._service.getFields(this.submitted);
+
     }
+    onUpdate(){
+      this.submitted=false;
+      this.customerInfoFields=this._service.getFields('');
+      
+      console.log(this.submitted);
+      // console.log(this.customerInfoFields);
+
+    }
+
+   
 }
